@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class SuppliersController extends Controller
+{
+    public function index()
+    {
+        return view('Suppliers.index');
+    }
+    public function add_Form()
+    {
+        return view('Suppliers.add');
+    }
+}
