@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,10 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
+        $user_role = User::where('email', $request->email)->get('role');
+        // return $user_role;
         if (Auth::attempt($validated)) {
+            $request->session()->put('user_role', $user_role);
             return redirect()->route('Panel');
         } else {
             return redirect()->back('/login');

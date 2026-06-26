@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::with('Products')->get();
+        $request->session()->get('user_role');
         return view('Categories.index', ['categories' => $categories]);
+        // return $categories;
     }
     public function add_Category(Request $request)
     {
@@ -23,6 +25,16 @@ class CategoriesController extends Controller
         } else {
             // $request->session()->flash();
             return redirect()->back()->with('failed', 'New Category Added');
+        }
+    }
+    public function destroy($id)
+    {
+        $delete_cat = Category::destroy($id);
+        if ($delete_cat) {
+            return redirect()->back()->with('success', 'Category Deleted');
+        } else {
+
+            return redirect()->back()->with('error', 'Category Deletion Failed');
         }
     }
 }

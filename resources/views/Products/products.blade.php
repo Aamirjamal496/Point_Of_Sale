@@ -6,6 +6,10 @@
 
 <div class="card card-soft">
 
+    @if(session('success'))
+    @endif
+    @if(session('error'))
+    @endif
     <div class="card-header bg-white d-flex justify-content-between">
 
         <div>
@@ -42,34 +46,45 @@
             </thead>
 
             <tbody>
-
+                @foreach($products as $product)
                 <tr>
+                    @if($product)
 
-                    <td>1</td>
+                    <td>{{$product->id}}</td>
 
                     <td>
-                        <img src="https://placehold.co/50"
-                            class="rounded">
+                        <img src="{{asset('/storage/Product_Images/'.$product->product_image)}}"
+                            class="rounded" style="width: 50px;">
                     </td>
 
-                    <td>Laptop</td>
-                    <td>Electronics</td>
-                    <td>20</td>
-                    <td>$1000</td>
+                    <td>{{$product->product_name}}</td>
+                    <td>{{$product->category->name}}</td>
+
+                    <td>1</td>
+                    <td>{{$product->selling_price}}</td>
 
                     <td>
 
                         <a href='/products/edit' class="btn btn-sm btn-warning">
                             Edit
                         </a>
-
-                        <button class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
+                        <form action="{{url('/products/delete/'.$product->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete" />
+                            <button class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
+                        </form>
 
                     </td>
 
+                    @elseif(!$product)
+                    <div class="container">
+                        No Products Found
+                    </div>
+                    @endif
                 </tr>
+                @endforeach
 
             </tbody>
 

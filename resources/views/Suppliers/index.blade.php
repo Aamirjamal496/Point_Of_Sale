@@ -5,6 +5,10 @@
 @section('content')
 
 <div class="card card-soft">
+    @if(session('success'))
+    @endif
+    @if(session('error'))
+    @endif
 
     <div class="card-header bg-white d-flex justify-content-between">
 
@@ -31,18 +35,26 @@
             </thead>
 
             <tbody>
-
+                @foreach($suppliers as $supplier)
                 <tr>
-                    <td>ABC Traders</td>
-                    <td>Ali</td>
-                    <td>03001234567</td>
-                    <td>abc@gmail.com</td>
+                    <td>{{$supplier->supplier_name}}</td>
+                    <td>{{$supplier->contact_person}}</td>
+                    <td>{{$supplier->phone}}</td>
+                    <td>{{$supplier->email}}</td>
                     <td>
                         <button class="btn btn-warning btn-sm">
                             Edit
                         </button>
+                        <form action="{{url('/suppliers/delete/'.$supplier->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete" />
+                            <button class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
+                @endforeach
 
             </tbody>
 

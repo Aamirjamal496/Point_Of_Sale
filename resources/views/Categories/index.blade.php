@@ -17,6 +17,8 @@
     @if(session('error'))
     @endif
     <div class="card-header bg-white d-flex justify-content-between">
+        <p>Role: {{session('user_role.0.role')}}</p>
+
 
         <h6 class="mb-0">Category List</h6>
 
@@ -52,6 +54,11 @@
                         <button class="btn btn-warning btn-sm">
                             Edit
                         </button>
+                        <form action="{{url('/categories/delete-category/'. $category->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete" />
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

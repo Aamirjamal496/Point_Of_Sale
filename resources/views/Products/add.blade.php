@@ -12,19 +12,22 @@
 
     <div class="card-body">
 
-        <form>
-
+        <form action="/products/add" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="row">
 
                 <div class="col-md-6 mb-3">
                     <label>Product Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="name" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label>Category</label>
-                    <select class="form-select">
+                    <select class="form-select" name="category">
                         <option>Select Category</option>
+                        @foreach($categories as $id=> $category)
+                        <option value="{{$id}}">{{$category}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <!-- 
@@ -35,25 +38,28 @@
 
                 <div class="col-md-6 mb-3">
                     <label>Supplier</label>
-                    <select class="form-select">
+                    <select class="form-select" name="supplier">
                         <option>Select Supplier</option>
+                        @foreach($suppliers as $id=>$supplier)
+                        <option value="{{$id}}">{{$supplier}}</option>
+                        @endforeach
                     </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Stock</label>
+                    <input type="number" name="stock" class="form-control">
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label>Purchase Price</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="purchase_price" class="form-control">
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label>Selling Price</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="selling_price" class="form-control">
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label>Stock</label>
-                    <input type="number" class="form-control">
-                </div>
 
                 <!-- <div class="col-12 mb-3">
                     <label>Description</label>
@@ -62,7 +68,7 @@
 
                 <div class="col-12 mb-3">
                     <label>Product Image</label>
-                    <input type="file" class="form-control">
+                    <input type="file" name="image" class="form-control">
                 </div>
 
             </div>

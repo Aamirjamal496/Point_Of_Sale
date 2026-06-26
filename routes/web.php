@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Middleware\AuthAdmin;
@@ -21,23 +22,29 @@ Route::middleware(['AuthAdmin'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('Panel');
 
     // Products Routes:
-    Route::get('/products', [ProductsController::class, 'index']);
+    Route::get('/products', [ProductsController::class, 'index'])->name('Products');
     // ->middleware(AuthAdmin::class);
     Route::get('/products/add', [ProductsController::class, 'add_Form']);
+    Route::post('/products/add', [ProductsController::class, 'store']);
     Route::get('/products/edit', [ProductsController::class, 'edit_Form']);
+    Route::delete('/products/delete/{id}', [ProductsController::class, 'destroy']);
 
     // Categories Route:
     Route::get('/categories', [CategoriesController::class, 'index']);
     Route::post('/categories/add-category', [CategoriesController::class, 'add_Category']);
+    Route::delete('/categories/delete-category/{id}', [CategoriesController::class, 'destroy']);
 
     // Inventory Routes
-    Route::get('/inventory', function () {
-        return view('Inventory.index');
-    });
+    Route::get('/inventory', [InventoryController::class, 'index']);
+    Route::get('/inventory/history', [InventoryController::class, 'historyPage']);
+    Route::get('/inventory/adjust', [InventoryController::class, 'add']);
+    Route::post('/inventory/adjust', [InventoryController::class, 'storeAdjustment']);
 
     // Suppliers Routes:
-    Route::get('/suppliers', [SuppliersController::class, 'index']);
+    Route::get('/suppliers', [SuppliersController::class, 'index'])->name('Suppliers');
     Route::get('/suppliers/add', [SuppliersController::class, 'add_Form']);
+    Route::post('/suppliers/add', [SuppliersController::class, 'store']);
+    Route::delete('/suppliers/delete/{id}', [SuppliersController::class, 'destroy']);
 
     // Purchaes Routes
     Route::prefix('/purchases')->group(function () {
