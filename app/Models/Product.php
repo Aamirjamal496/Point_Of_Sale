@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\InventoryTransaction;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Supplier;
 
@@ -16,5 +17,9 @@ class Product extends Model
     function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+    function Transactions()
+    {
+        return $this->hasMany(InventoryTransaction::class);
     }
 }

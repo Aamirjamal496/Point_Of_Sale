@@ -15,6 +15,7 @@
             New Purchase
         </a>
 
+
     </div>
 
     <div class="card-body">
@@ -37,10 +38,13 @@
             <tbody>
 
                 <tr>
-                    <td>PUR-1001</td>
+                    @foreach($purchases as $purchase)
+                    @foreach($purchase->purchase_items as $item)
+                    <td>{{$item->id}}</td>
+                    @endforeach
                     <td>ABC Traders</td>
-                    <td>12 Jun 2026</td>
-                    <td>$2,500</td>
+                    <td>{{$purchase->purchase_date}}</td>
+                    <td>{{$purchase->total}}</td>
                     <td>
                         <span class="badge bg-success">
                             Completed
@@ -51,6 +55,7 @@
                             View
                         </a>
                     </td>
+                    @endforeach
                 </tr>
 
             </tbody>

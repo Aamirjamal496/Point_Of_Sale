@@ -1,6 +1,3 @@
-**File:** `resources/views/inventory/history.blade.php`
-
-```blade
 @extends('layouts.app')
 
 @section('title','Inventory History')
@@ -80,8 +77,9 @@
                 <tbody>
 
                     <tr>
+                        @foreach($transactions as $transaction)
 
-                        <td>1</td>
+                        <td>{{$transaction->id}}</td>
 
                         <td>20 Jun 2026</td>
 

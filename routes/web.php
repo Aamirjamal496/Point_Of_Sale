@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
@@ -48,16 +49,10 @@ Route::middleware(['AuthAdmin'])->group(function () {
 
     // Purchaes Routes
     Route::prefix('/purchases')->group(function () {
-
-        Route::get('/', function () {
-            return view('Purchases.index');
-        });
-        Route::get('/add', function () {
-            return view('Purchases.add');
-        });
-        Route::get('/show', function () {
-            return view('Purchases.show');
-        });
+        Route::get('/', [PurchaseController::class, "index"]);
+        Route::get('/add', [PurchaseController::class, "PurchaseForm"]);
+        Route::post('/create', [PurchaseController::class, 'CreatePurchase']);
+        Route::get('/show', [PurchaseController::class, "editPurchase"]);
     });
 
     // Customers Routes:

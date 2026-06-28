@@ -6,6 +6,7 @@
 
 <div class="card card-soft">
 
+    <a class="btn btn-light btn-sm" href="/purchases">Back</a>
     <div class="card-header bg-white">
 
         Purchase #PUR-1001

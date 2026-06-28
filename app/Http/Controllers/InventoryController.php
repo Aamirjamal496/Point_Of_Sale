@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InventoryTransaction;
 use App\Models\Product;
 use App\Models\StockAdjustment;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class InventoryController extends Controller
     }
     public function historyPage()
     {
-        return view('Inventory.history');
+        $transaction  = InventoryTransaction::with(['user', 'Products'])->get();
+        return $transaction;
+        // return view('Inventory.history', ['transactions' => $transaction]);
     }
     public function add()
     {

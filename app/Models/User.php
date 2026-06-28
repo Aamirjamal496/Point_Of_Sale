@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\InventoryTransaction;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -14,6 +15,10 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
+    function transactions()
+    {
+        return $this->hasMany(InventoryTransaction::class);
+    }
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 

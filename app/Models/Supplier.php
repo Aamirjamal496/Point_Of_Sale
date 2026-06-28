@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
+use App\Models\Purchase;
+use Illuminate\Database\Eloquent\Model;
 
 class Supplier extends Model
 {
@@ -11,5 +12,9 @@ class Supplier extends Model
     function Products()
     {
         return $this->hasMany(Product::class);
+    }
+    function Purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

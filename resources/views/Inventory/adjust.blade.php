@@ -83,16 +83,7 @@
                         <textarea class="form-control" name="notes"></textarea>
 
                     </div>
-                    <!-- <div class="col-12 mb-3"> -->
-
-                    <!-- <label>Role</label> -->
-
-                    Role :{{session('user_role.0.role')}}
                     <input type="hidden" name="role" value="{{session('user_role.0.role')}}" />
-                    <!-- <select type="text" class="form-control" name="stock" readonly>
-                            <option value="{{session('user_role.0.role')}}" default> {{session('user_role.0.role')}}</option>
-                        </select> -->
-                    <!-- </div> -->
                 </div>
 
             </div>
