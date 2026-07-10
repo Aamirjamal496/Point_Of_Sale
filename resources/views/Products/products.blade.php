@@ -60,7 +60,7 @@
                     <td>{{$product->product_name}}</td>
                     <td>{{$product->category->name}}</td>
 
-                    <td>1</td>
+                    <td>{{$product->stock}}</td>
                     <td>{{$product->selling_price}}</td>
 
                     <td>
@@ -71,7 +71,7 @@
                         <form action="{{url('/products/delete/'.$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="delete" />
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger p-1">
                                 Delete
                             </button>
                         </form>

@@ -27,17 +27,17 @@
             </thead>
 
             <tbody>
-
+                @foreach($invoices as $invoice)
                 <tr>
 
-                    <td>INV-1001</td>
-                    <td>John Doe</td>
-                    <td>20 Jun 2026</td>
-                    <td>$1,250</td>
+                    <td>{{$invoice->invoice_no}}</td>
+                    <td>{{$invoice->customer->first()->name}}</td>
+                    <td>{{$invoice->created_at}}</td>
+                    <td>{{$invoice->grandtotal}}</td>
 
                     <td>
 
-                        <a href="/invoices/show" class="btn btn-sm btn-primary">
+                        <a href="{{url('/invoices/show/'.$invoice->id)}}" class="btn btn-sm btn-primary">
                             View
                         </a>
 
@@ -48,6 +48,7 @@
                     </td>
 
                 </tr>
+                @endforeach
 
             </tbody>
 

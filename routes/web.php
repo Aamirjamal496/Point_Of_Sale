@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\salesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Middleware\AuthAdmin;
+use App\Http\Middleware\AuthUser;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,14 +21,13 @@ Route::get('/login', [AuthController::class, 'index'])->name("Login");
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware(['AuthAdmin'])->group(function () {
+Route::middleware(['AuthUser'])->group(function () {
 
     // Dashboard Routes:
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('Panel');
 
     // Products Routes:
-    Route::get('/products', [ProductsController::class, 'index'])->name('Products');
-    // ->middleware(AuthAdmin::class);
+    Route::get('/products', [ProductsController::class, 'index'])->name('Products'); // ->middleware(AuthAdmin::class);
     Route::get('/products/add', [ProductsController::class, 'add_Form']);
     Route::post('/products/add', [ProductsController::class, 'store']);
     Route::get('/products/edit', [ProductsController::class, 'edit_Form']);
@@ -37,7 +40,8 @@ Route::middleware(['AuthAdmin'])->group(function () {
 
     // Inventory Routes
     Route::get('/inventory', [InventoryController::class, 'index']);
-    Route::get('/inventory/history', [InventoryController::class, 'historyPage']);
+    Route::get('/inventory/history', [InventoryController::class, 'historyPage'])->middleware('AuthAdmin');
+    Route::get('/inventory/history/search', [InventoryController::class, 'Search']);
     Route::get('/inventory/adjust', [InventoryController::class, 'add']);
     Route::post('/inventory/adjust', [InventoryController::class, 'storeAdjustment']);
 
@@ -52,29 +56,23 @@ Route::middleware(['AuthAdmin'])->group(function () {
         Route::get('/', [PurchaseController::class, "index"]);
         Route::get('/add', [PurchaseController::class, "PurchaseForm"]);
         Route::post('/create', [PurchaseController::class, 'CreatePurchase']);
-        Route::get('/show', [PurchaseController::class, "editPurchase"]);
+        Route::get('/show/{id}', [PurchaseController::class, "viewPurchase"]);
     });
 
     // Customers Routes:
-    Route::get('/customers', function () {
-        return view('Customers.index');
-    });
-    Route::get('/customer/details', function () {
-        return view('Customers.show');
-    });
+    Route::get('/customers', [CustomerController::class, 'index']);
+    Route::get('/customer/details/{id}', [CustomerController::class, 'show']);
+    Route::get('/customer/add', [CustomerController::class, 'addForm']);
+    Route::post('/customer/add', [CustomerController::class, 'addCustomer']);
 
     // POS sales Routes:
-    Route::get('/sales', function () {
-        return view('POS_Sales.index');
-    });
+    Route::get('/sales', [salesController::class, 'index']);
+    Route::post('/sales/checkout', [salesController::class, 'checkout']);
+    Route::get('/invoice/{InvoiceId}', [salesController::class, 'invoice']);
 
     // Invoices Routes:
-    Route::get('/invoices', function () {
-        return view('Invoices.index');
-    });
-    Route::get('/invoices/show', function () {
-        return view('Invoices.show');
-    });
+    Route::get('/invoices', [InvoiceController::class, 'index']);
+    Route::get('/invoices/show/{id}', [salesController::class, 'invoice']);
 
     // Reports Routes:
     Route::get('/reports', function () {

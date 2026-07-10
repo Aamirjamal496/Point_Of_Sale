@@ -10,7 +10,7 @@ class InventoryTransaction extends Model
 {
     protected $table = 'inventorytransactions';
     protected $fillable = ['product_id', 'type', 'quantity', 'stock_before', 'stock_after', 'reference_type'];
-    function Products()
+    function Product()
     {
         return $this->belongsTo(Product::class);
     }

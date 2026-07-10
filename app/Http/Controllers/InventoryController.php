@@ -16,9 +16,11 @@ class InventoryController extends Controller
     }
     public function historyPage()
     {
-        $transaction  = InventoryTransaction::with(['user', 'Products'])->get();
-        return $transaction;
-        // return view('Inventory.history', ['transactions' => $transaction]);
+        $transactions  = InventoryTransaction::with('Product')->get();
+        // $transaction  = InventoryTransaction::get();
+        // return $transaction;
+        $product = $transactions->first()->product;
+        return view('Inventory.history', compact(['transactions', 'product']));
     }
     public function add()
     {
@@ -46,5 +48,10 @@ class InventoryController extends Controller
             'role' => $request->role,
         ]);
         return redirect('/inventory')->with('Success', 'Adjustment Done');
+    }
+    public function Search(Request $request)
+    {
+        $search  = InventoryTransaction::where("product_name", "like", "%$request->search%")->paginate(20);
+        return $search;
     }
 }

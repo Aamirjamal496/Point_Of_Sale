@@ -6,20 +6,21 @@
 
 <div class="row">
 
-    <div class="col-md-4">
+    @foreach($customers as $customer)
+    <div class="col-md-3 h-2">
 
         <div class="card card-soft">
 
             <div class="card-body text-center">
 
-                <img src="https://placehold.co/120"
-                    class="rounded-circle mb-3">
+                <img src="https://placehold.net/avatar-5.svg"
+                    class="rounded-circle mb-2" style="width: 5rem;">
 
-                <h5>John Doe</h5>
+                <h6>{{$customer->name}}</h5>
 
-                <p>john@gmail.com</p>
+                    <p>{{$customer->email}}</p>
 
-                <p>03001234567</p>
+                    <span>{{$customer->phone}}</span>
 
             </div>
 
@@ -66,6 +67,7 @@
         </div>
 
     </div>
+    @endforeach
 
 </div>
 

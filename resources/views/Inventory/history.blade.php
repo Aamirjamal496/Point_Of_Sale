@@ -75,37 +75,48 @@
                 </thead>
 
                 <tbody>
-
+                    @if($transactions)
+                    @foreach($transactions as $transaction)
                     <tr>
-                        @foreach($transactions as $transaction)
 
                         <td>{{$transaction->id}}</td>
 
-                        <td>20 Jun 2026</td>
+                        <td>{{$transaction->created_at->format('d/m/Y')}}</td>
+                        @if($product)
+                        <td>{{$product->product_name}}</td>
+                        <td>{{$product->sku}}</td>
+                        @endif
 
-                        <td>Dell Laptop</td>
-
-                        <td>DL001</td>
-
+                        @if($transaction->type =="purchase")
                         <td>
                             <span class="badge bg-success">
-                                Purchase
+                                {{$transaction->type}}
                             </span>
                         </td>
+                        @else
+                        <td>
+                            <span class="badge bg-primary">
+                                {{$transaction->type}}
+                            </span>
+
+                        </td>
+                        @endif
 
                         <td class="text-success">
-                            +20
+                            {{$transaction->quantity}}
                         </td>
 
-                        <td>80</td>
+                        <td>{{$transaction->stock_after}}</td>
 
-                        <td>Purchase Order</td>
+                        <td>{{$transaction->reason}}</td>
 
-                        <td>Admin</td>
-
+                        <td>{{$transaction->role}}</td>
                     </tr>
-
-                    <tr>
+                    @endforeach
+                    @else
+                    <span class="bg-danger w-2xl">No history Found</span>
+                    @endif
+                    <!-- <tr>
 
                         <td>2</td>
 
@@ -159,9 +170,9 @@
 
                         <td>Admin</td>
 
-                    </tr>
+                    </tr> -->
 
-                    <tr>
+                    <!-- <tr>
 
                         <td>4</td>
 
@@ -187,7 +198,7 @@
 
                         <td>Admin</td>
 
-                    </tr>
+                    </tr> -->
 
                 </tbody>
 

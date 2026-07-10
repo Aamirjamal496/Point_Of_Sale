@@ -5,25 +5,37 @@
 @section('content')
 
 <div class="row g-3">
+    @if(session('success'))
+    @endif
+    @if(session('error'))
+    @endif
 
     <div class="col-md-3">
         <div class="card card-soft stat-card">
             <h6>Total Products</h6>
-            <h3>1,245</h3>
+            @if($products)
+            <h3>{{$products}}</h3>
+            @endif
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card card-soft stat-card">
             <h6>Customers</h6>
-            <h3>540</h3>
+            @if($customers)
+            <h3>{{$customers}}</h3>
+            @endif
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card card-soft stat-card">
             <h6>Today's Sales</h6>
-            <h3>$2,450</h3>
+            @if($today_sale)
+            <h3>{{$today_sale}}</h3>
+            @else
+            <h3>No sale today</h3>
+            @endif
         </div>
     </div>
 
@@ -60,13 +72,14 @@
                     </thead>
 
                     <tbody>
-
+                        @if($recent_sale)
                         <tr>
-                            <td>#1001</td>
-                            <td>John</td>
-                            <td>Today</td>
-                            <td>$120</td>
+                            <td>{{$recent_sale->invoice_no}}</td>
+                            <td>{{$recent_sale->customer->name ?? '-'}}</td>
+                            <td>{{$recent_sale->created_at}}</td>
+                            <td>{{$recent_sale->grandtotal}}</td>
                         </tr>
+                        @endif
 
                     </tbody>
 
@@ -89,15 +102,16 @@
             <div class="card-body">
 
                 <ul class="list-group">
+                    @if($low_stock)
+                    @foreach($low_stock as $stock)
 
                     <li class="list-group-item">
-                        Dell Mouse
+                        {{$stock->product_name}}
                     </li>
-
-                    <li class="list-group-item">
-                        Keyboard
-                    </li>
-
+                    @endforeach
+                    @else
+                    <li>No Items With Low Stock</li>
+                    @endif
                 </ul>
 
             </div>

@@ -12,9 +12,9 @@
             Customer List
         </h6>
 
-        <button class="btn btn-primary btn-sm">
+        <a href="customer/add" class="btn btn-primary btn-sm">
             Add Customer
-        </button>
+        </a>
 
     </div>
 
@@ -34,23 +34,29 @@
 
             <tbody>
 
+                @foreach($customers as $customer)
                 <tr>
 
-                    <td>John Doe</td>
-                    <td>03001234567</td>
-                    <td>john@gmail.com</td>
+                    <td>{{$customer->name}}</td>
+                    <td>{{$customer->phone}}</td>
+                    <td>{{$customer->email}}</td>
                     <td>$1,250</td>
 
                     <td>
-                        <button class="btn btn-warning btn-sm">
-                            Edit
-                        </button>
-                        <a href="/customer/details" class="btn btn-info btn-sm">
+                        <form action="{{'/customer/delete/'.$customer->id}}" method="post">
+                            @csrf
+                            <input type="hidden" name="__method" value="delete">
+                            <button class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                        </form>
+                        <a href="{{'/customer/details/'.$customer->id}}" class="btn btn-info btn-sm">
                             Details
                         </a>
                     </td>
 
                 </tr>
+                @endforeach
 
             </tbody>
 

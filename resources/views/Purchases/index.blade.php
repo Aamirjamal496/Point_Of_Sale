@@ -37,26 +37,44 @@
 
             <tbody>
 
+                @foreach($purchases as $purchase)
                 <tr>
-                    @foreach($purchases as $purchase)
-                    @foreach($purchase->purchase_items as $item)
-                    <td>{{$item->id}}</td>
-                    @endforeach
-                    <td>ABC Traders</td>
+                    <td>{{$purchase->id}}</td>
+                    @if($supplier)
+                    <td>{{$supplier->supplier_name}}</td>
+                    @endif
                     <td>{{$purchase->purchase_date}}</td>
-                    <td>{{$purchase->total}}</td>
+                    <td>${{number_format($purchase->total, 2)}}</td>
                     <td>
                         <span class="badge bg-success">
                             Completed
                         </span>
                     </td>
                     <td>
-                        <a href="/purchases/show" class="btn btn-sm btn-outline-primary">
+                        <a href="{{url('/purchases/show/'.$purchase->id)}}" class="btn btn-sm btn-outline-primary">
                             View
                         </a>
-                    </td>
-                    @endforeach
+                        <!-- </td> -->
+                        <!-- <td> -->
+                        <!-- Check and loop through the relationship object -->
+                        <!-- @if($purchase->purchaseItems && $purchase->purchaseItems->isNotEmpty()) -->
+                        <!-- <ul> -->
+                        <!-- @foreach ($purchase->purchaseItems as $item) -->
+                        <!-- <li> -->
+                        <!-- <strong>Item ID:</strong> {{ $item->id }} | -->
+                        <!-- <strong>Product ID:</strong> {{ $item->product_id }} | -->
+                        <!-- <strong>Qty:</strong> {{ number_format($item->quantity, 0) }} | -->
+                        <!-- <strong>Cost:</strong> ${{ number_format($item->cost_price, 2) }} | -->
+                        <!-- <strong>Subtotal:</strong> ${{ number_format($item->subtotal, 2) }} -->
+                        <!-- </li> -->
+                        <!-- @endforeach -->
+                        <!-- </ul> -->
+                        <!-- @else -->
+                        <!-- <span>No items found.</span> -->
+                        <!-- @endif -->
+                        <!-- </td> -->
                 </tr>
+                @endforeach
 
             </tbody>
 

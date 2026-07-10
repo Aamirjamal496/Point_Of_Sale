@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Product;
+use App\Models\Sale;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -26,9 +31,9 @@ class AuthController extends Controller
         // return $user_role;
         if (Auth::attempt($validated)) {
             $request->session()->put('user_role', $user_role);
-            return redirect()->route('Panel');
+            return redirect()->route('Panel')->with('success', 'Logged In Successfuly');
         } else {
-            return redirect()->back('/login');
+            return redirect()->back()->with('error', 'Login Failed');
         }
     }
     public function logout(Request $request)
@@ -39,6 +44,14 @@ class AuthController extends Controller
     }
     public function dashboard()
     {
-        return view('Admin.Dashboard');
+        $products = Product::count();
+        $customers = Customer::count();
+        $recent_sale = Sale::latest()->first();
+        // return $recent_sale;
+        $low_stock = Product::whereColumn('stock', '<', 'min_stock')->get();
+        $today_sale = Sale::whereDate('created_at', Carbon::today())->sum('grandtotal');
+        // return $today_sale;
+        // return $low_stock;
+        return view('Admin.Dashboard', compact('products', 'customers', 'recent_sale', 'low_stock', 'today_sale'));
     }
 }

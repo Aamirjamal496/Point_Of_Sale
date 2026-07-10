@@ -14,16 +14,17 @@ class PurchaseController extends Controller
 {
     public function index()
     {
-        // $purchases = Purchase::with("PurchaseItems")->get();
+        $purchases = Purchase::with("PurchaseItems")->get();
+        // return $purchases;
         // foreach ($purchases as $purchase) {
         //     $items = $purchase->purchase_Items;
         //     return $items
         // }
         // return $purchases->purchase_items;
-        // $supplierid = $purchases->supplier_id;
-        // $supplier_name = Supplier::findOrFail($supplierid);
-        // return $supplier_name;
-        return view("Purchases.index", compact("purchases"));
+        $supplierid = $purchases->first()->supplier_id;
+        $supplier = Supplier::findOrFail($supplierid);
+        // return $purchases;
+        return view("Purchases.index", compact(["purchases", "supplier"]));
     }
     public function PurchaseForm()
     {
@@ -31,9 +32,18 @@ class PurchaseController extends Controller
         $products = Product::get();
         return view("Purchases.add", compact("suppliers", "products"));
     }
-    public function editPurchase()
+    public function viewPurchase(Request $request, $id)
     {
-        return view("Purchases.show");
+        // $purchases = Purchase::find($id)->first();
+        $purchases = Purchase::with('PurchaseItems')->findOrFail($id);
+        $supplierid = $purchases->supplier_id;
+        $supplier = Supplier::findorFail($supplierid);
+        $items = $purchases->purchaseItems;
+        $productID = $items->first()->product_id;
+        $product = Product::findOrFail($productID);
+        // return $productID;
+        // return [$purchases, $supplier, $product];
+        return view("Purchases.show", compact(["purchases", 'supplier', "product"]));
     }
     public function CreatePurchase(Request $request)
     {

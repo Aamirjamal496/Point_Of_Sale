@@ -5,8 +5,9 @@
 @section('content')
 
 <div class="card card-soft">
-    <a class="btn btn-light btn-sm" href="/inventory/history">Inventroy History</a>
-
+    @if(auth()->user()->role === 'Admin')
+    <a class="btn btn-light btn-sm" href="/inventory/history">Inventory History</a>
+    @endif
     <div class="card-header bg-white d-flex justify-content-between">
 
         <h6 class="mb-0">Inventory Status</h6>
@@ -35,8 +36,8 @@
 
             <tbody>
 
+                @foreach($products as $product)
                 <tr>
-                    @foreach($products as $product)
                     <td>{{$product->product_name}}</td>
                     <td>{{$product->sku}}</td>
                     <td>{{$product->stock}}</td>
@@ -52,8 +53,8 @@
                             </span>
                             @endif
                     </td>
-                    @endforeach
                 </tr>
+                @endforeach
 
                 <!-- <tr>
                     <td>Mouse</td>

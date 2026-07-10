@@ -16,10 +16,10 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
+        if (auth()->user()->role === 'Admin') {
             return $next($request);
         } else {
-            return redirect()->to('/login');
+            return redirect()->back();
         }
     }
 }
