@@ -6,8 +6,10 @@ use App\Models\Category;
 use App\Models\Customer;
 use App\Models\InventoryTransaction;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\SaleItem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -70,13 +72,13 @@ class salesController extends Controller
                     'stock_after' => $stockafter,
                     'reference_type' => $sale->invoice_no,
                 ]);
+                }
                 DB::commit();
                 return response()->json([
                     'success' => true,
                     'sale_id' => $sale->id,
                     'invoice_id' => $sale->invoive_no,
                 ]);
-            }
         } catch (\Exception $e) {
             DB::rollBack();
             return response([
@@ -85,9 +87,20 @@ class salesController extends Controller
             ]);
         }
     }
-    public function invoice(Request $request, $id)
+    public function invoice(Request $request,int $id)
     {
         $sale = Sale::with(['items.product', 'customer', 'User'])->findOrFail($id);
         return  view('POS_Sales.invoice', compact('sale'));
+    }
+    public function showreports(){
+        $invoice_count = Sale::count();
+        $sales = Sale::sum('grandtotal');
+        $purchases = Purchase::on('PurchaseItems')->get();
+        // $cost_price = Sale::sum('');
+        // $sale_price = Sale::sum('sellingprice');
+        // $purchase= $purchases->first()->purchase_items->count;
+        return $purchases;
+        // return $salecount;
+        return view('Reports.index',compact(['invoice_count','sales','purchases']));
     }
 }

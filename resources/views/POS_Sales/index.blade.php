@@ -120,12 +120,12 @@
 
                 <div class="d-flex justify-content-between">
                     <span>Subtotal</span>
-                    <b id="subtotal" id='subtotal'>0</b>
+                    <b id="subtotal">0</b>
                 </div>
 
                 <div class="mb-2">
                     <label class="form-label">Discount</label>
-                    <input type="number" id="discountInput" class="form-control" value="0" min="0" placeholder="Enter discount">
+                    <input type="number" id="discountInput" class="form-control" value="0"  min="0" placeholder="Enter discount">
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -180,7 +180,7 @@
         let item = cart.find(p => p.id == id);
 
         if (item) {
-            item.qty++;
+            item.quantity++;
         } else {
             cart.push({
                 id: id,
@@ -189,10 +189,8 @@
                 quantity: 1
             });
         }
+        renderCart();
 
-        document.getElementById("discountInput").addEventListener("input", function() {
-            renderCart();
-        });
     }
 
     // ================= RENDER CART =================
@@ -225,8 +223,8 @@
         </tr>`;
         });
 
-        let discountInput = parseFloat(document.getElementById("discountInput").value || 0);
-        let discount = (discountInput / 100) * subtotal;
+        let discountInput = parseFloat(document.getElementById("discountInput").value) || 0;
+        let discount = (subtotal * discountInput) / 100;
 
         // prevent negative total
         if (discount > subtotal) discount = subtotal;
@@ -324,4 +322,16 @@
             alert('An error occurred during checkout. Check the console for details.');
         });
     }
+    document.addEventListener("DOMContentLoaded", function () {
+
+    const discountElement = document.getElementById('discountInput');
+
+    if (discountElement) {
+        discountElement.addEventListener("input", function () {
+            console.log('DiscountChanged:',this.value);
+            renderCart();
+        });
+    }
+
+});
 </script>

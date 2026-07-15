@@ -10,9 +10,18 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = Category::with('Products')->get();
-        $request->session()->get('user_role');
-        return view('Categories.index', ['categories' => $categories]);
+        // $products = Category::with('Products')->count();
+        $products=$categories->first()->products->count();
+        // return $products;
+
+        // $request->session()->get('user_role');
+        return view('Categories.index', compact('categories','products'));
         // return $categories;
+    }
+    public function details(int $id){
+        $category = Category::with('Products')->findOrFail($id);
+        // return $category;
+        return view('Categories.details',['category'=>$category]);
     }
     public function add_Category(Request $request)
     {
@@ -27,7 +36,7 @@ class CategoriesController extends Controller
             return redirect()->back()->with('failed', 'New Category Added');
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $delete_cat = Category::destroy($id);
         if ($delete_cat) {

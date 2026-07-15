@@ -6,7 +6,7 @@
 
 <div class="row">
 
-    @foreach($customers as $customer)
+    @if($customers)
     <div class="col-md-3 h-2">
 
         <div class="card card-soft">
@@ -16,11 +16,11 @@
                 <img src="https://placehold.net/avatar-5.svg"
                     class="rounded-circle mb-2" style="width: 5rem;">
 
-                <h6>{{$customer->name}}</h5>
+                <h6>{{$customers->name}}</h5>
 
-                    <p>{{$customer->email}}</p>
+                    <p>{{$customers->email}}</p>
 
-                    <span>{{$customer->phone}}</span>
+                    <span>{{$customers->phone}}</span>
 
             </div>
 
@@ -51,13 +51,19 @@
                     </thead>
 
                     <tbody>
-
+                        @forelse($customers->sale as $sale)
                         <tr>
-                            <td>INV-1001</td>
-                            <td>20 Jun 2026</td>
-                            <td>$500</td>
+                            <td><a href="{{'/invoices/show/'.$sale->id}}">{{$sale->invoice_no}}</a></td>
+                            <td>{{$sale->created_at}}</td>
+                            <td>{{$sale->grandtotal}}</td>
+                            @empty
+                            <td>No sale found for this custommer</td>
                         </tr>
-
+                        @endforelse
+                        <!-- <tr>
+                            <ul>
+                            </ul>
+                        </tr> -->
                     </tbody>
 
                 </table>
@@ -67,7 +73,7 @@
         </div>
 
     </div>
-    @endforeach
+    @endif
 
 </div>
 

@@ -3,7 +3,6 @@
 @section('title','Dashboard')
 
 @section('content')
-
 <div class="row g-3">
     @if(session('success'))
     @endif
@@ -34,7 +33,7 @@
             @if($today_sale)
             <h3>{{$today_sale}}</h3>
             @else
-            <h3>No sale today</h3>
+            <h5>No sale today</h5>
             @endif
         </div>
     </div>
@@ -119,7 +118,36 @@
         </div>
 
     </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card card-soft">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Sales Analytics</span>
+
+                    <select id="chartFilter" class="form-select w-auto">
+                        <option value="monthly">Monthly Sales</option>
+                        <option value="yearly">Yearly Sales</option>
+                    </select>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="salesChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.salesData = {
+        monthly: @json($monthlyData),
+        yearlyLabels: @json($yearlyLabels),
+        yearly: @json($yearlyData),
+    };
+</script>
+
+<script src="{{ asset('js/dashboard.js') }}"></script>
 
 @endsection

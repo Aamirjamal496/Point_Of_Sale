@@ -40,8 +40,9 @@
                     <td>{{$customer->name}}</td>
                     <td>{{$customer->phone}}</td>
                     <td>{{$customer->email}}</td>
-                    <td>$1,250</td>
-
+                    @if($total_sale)
+                    <td>{{$total_sale}}</td>
+                    @endif
                     <td>
                         <form action="{{'/customer/delete/'.$customer->id}}" method="post">
                             @csrf

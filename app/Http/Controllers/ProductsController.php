@@ -19,15 +19,43 @@ class ProductsController extends Controller
         // return $image_path;
         return view('Products.products', ['products' => $products]);
     }
-    public function edit_Form()
-    {
+    public function add_Form()
+        {
+            $suppliers = Supplier::pluck('supplier_name', 'id')->toArray();
+            $categories = Category::pluck('name', 'id')->toArray();
+            return view('Products.add', compact('suppliers', 'categories'));
+        }
+    // public function edit_Form(int $id){
+    //     $product=Product::with('category')->findOrFail($id);
+    //     return $product;
+    //             // return view('Products.edit',compact('product'));
+    // }
+    public function edit_Form(){
+        // $product=Product::with('category')->findOrFail($id);
+        // return $product;
         return view('Products.edit');
     }
-    public function add_Form()
-    {
-        $suppliers = Supplier::pluck('supplier_name', 'id')->toArray();
-        $categories = Category::pluck('name', 'id')->toArray();
-        return view('Products.add', compact('suppliers', 'categories'));
+    public function edit_Values(int $id){
+        $product=Product::with('category')->findOrFail($id);
+        if(!$product){
+            return response()->json(['error'=>'Product Not Found']);
+        }
+        return response()->json([
+            'success'=>true,
+            'product'=>$product
+        ]);
+    }
+    public  function  update(Request $request){
+        $product=Product::findorFail($request->id);
+        $product->product_name = $request->pd_name;
+        $product->purchase_price = $request->pd_cost;
+        $product->selling_price = $request->pd_sale;
+        $product->stock = $request->pd_stock;
+       if(!$product->save()){
+        return redirect()->back()->with('error','Updation Failed');
+       }
+        return redirect()->to('/products')->with('success','Product Updated');
+    //    return $product->product_name;
     }
     public function store(Request $request)
     {
@@ -56,7 +84,7 @@ class ProductsController extends Controller
             return redirect()->back();
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $delete_product = Product::destroy($id);
         if ($delete_product) {

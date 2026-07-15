@@ -9,12 +9,18 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customer = Customer::all();
-        return view('Customers.index', ['customers' => $customer]);
+        $customers = Customer::with('Sale')->get();
+        // $All_sale = Customer::withSum('Sale', 'grandtotal')->find($customers->first()->id);
+        // return $All_sale;
+        foreach ($customers as $customer) {
+            $total_sale = $customer->sale->sum('grandtotal');
+        }
+        return view('Customers.index', compact(['customers', 'total_sale']));
     }
-    public function show($id)
+    public function show(int $id)
     {
-        $customer = Customer::findOrFail($id)->get();
+        $customer = Customer::with('Sale')->findOrFail($id);
+        // return $customer;
         return view('Customers.show', ['customers' => $customer]);
     }
     public function addForm()

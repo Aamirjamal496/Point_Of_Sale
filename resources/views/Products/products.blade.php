@@ -65,7 +65,7 @@
 
                     <td>
 
-                        <a href='/products/edit' class="btn btn-sm btn-warning">
+                        <a href="{{url('/products/edit/'.$product->id)}}" class="btn btn-sm btn-warning">
                             Edit
                         </a>
                         <form action="{{url('/products/delete/'.$product->id)}}" method="post">

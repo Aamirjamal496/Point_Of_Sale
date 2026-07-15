@@ -30,13 +30,17 @@ Route::middleware(['AuthUser'])->group(function () {
     Route::get('/products', [ProductsController::class, 'index'])->name('Products'); // ->middleware(AuthAdmin::class);
     Route::get('/products/add', [ProductsController::class, 'add_Form']);
     Route::post('/products/add', [ProductsController::class, 'store']);
-    Route::get('/products/edit', [ProductsController::class, 'edit_Form']);
+    // Route::get('/products/edit', [ProductsController::class, 'edit_Form']);
+    Route::get('/products/edit/{id}', [ProductsController::class, 'edit_Form']);
+    Route::get('/products/edit_values/{id}', [ProductsController::class, 'edit_Values']);
+    Route::post('/products/update', [ProductsController::class, 'update']);
     Route::delete('/products/delete/{id}', [ProductsController::class, 'destroy']);
 
     // Categories Route:
     Route::get('/categories', [CategoriesController::class, 'index']);
     Route::post('/categories/add-category', [CategoriesController::class, 'add_Category']);
     Route::delete('/categories/delete-category/{id}', [CategoriesController::class, 'destroy']);
+    Route::get('/categories/details/{id}', [CategoriesController::class, 'details']);
 
     // Inventory Routes
     Route::get('/inventory', [InventoryController::class, 'index']);
@@ -75,10 +79,9 @@ Route::middleware(['AuthUser'])->group(function () {
     Route::get('/invoices/show/{id}', [salesController::class, 'invoice']);
 
     // Reports Routes:
-    Route::get('/reports', function () {
-        return view('Reports.index');
-    });
-    Route::get('/reports/sales', function () {
-        return view('Reports.sales');
-    });
+    // Route::get('/reports', function () {
+    //     return view('Reports.index');
+    // });
+    Route::get('/reports',[salesController::class,'showreports']);
+    // Route::get('/reports/sales',[salesController::class,'showreports']);
 });

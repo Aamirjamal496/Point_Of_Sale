@@ -49,11 +49,13 @@
                 <tr>
                     <td>{{$category->id}}</td>
                     <td>{{$category->name}}</td>
-                    <td>120</td>
+                    @if($products)
+                    <td>{{$products}}</td>
+                    @endif
                     <td>
-                        <button class="btn btn-warning btn-sm">
-                            Edit
-                        </button>
+                        <a href="{{url('/categories/details/'.$category->id)}}" class="btn btn-info btn-sm">
+                            Details
+</a>
                         <form action="{{url('/categories/delete-category/'. $category->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="delete" />

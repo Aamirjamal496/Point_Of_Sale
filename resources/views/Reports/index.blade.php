@@ -10,7 +10,9 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Total Sales</small>
-                <h3>$52,450</h3>
+                @if($sales)
+                <h4>Rs.{{$sales}}</h4>
+                @endif
             </div>
         </div>
     </div>
@@ -19,7 +21,9 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Total Purchases</small>
-                <h3>$34,800</h3>
+                @if($purchases)
+                <h4>$34,800</h4>
+                @endif
             </div>
         </div>
     </div>
@@ -28,7 +32,7 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Profit</small>
-                <h3>$17,650</h3>
+                <h4>$17,650</h4>
             </div>
         </div>
     </div>
@@ -37,7 +41,9 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Invoices</small>
-                <h3>1,250</h3>
+                @if($invoice_count)
+                <h4>{{$invoice_count}}</h4>
+                @endif
             </div>
         </div>
     </div>
