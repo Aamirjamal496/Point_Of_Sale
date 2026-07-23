@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\Low_StockExports;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomerController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\SuppliersController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthUser;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Excel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +27,9 @@ Route::middleware(['AuthUser'])->group(function () {
 
     // Dashboard Routes:
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('Panel');
+    Route::get("/export-lowStock",function(){
+        return (new Low_StockExports)->download("low-stock.pdf",Excel::DOMPDF);
+    });
 
     // Products Routes:
     Route::get('/products', [ProductsController::class, 'index'])->name('Products'); // ->middleware(AuthAdmin::class);
@@ -83,5 +88,5 @@ Route::middleware(['AuthUser'])->group(function () {
     //     return view('Reports.index');
     // });
     Route::get('/reports',[salesController::class,'showreports']);
-    // Route::get('/reports/sales',[salesController::class,'showreports']);
+    Route::get('/reports/sales',[salesController::class,'generateReport']);
 });

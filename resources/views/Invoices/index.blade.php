@@ -41,9 +41,9 @@
                             View
                         </a>
 
-                        <button class="btn btn-sm btn-success">
+                        <!-- <button onclick="window.print()" class="btn btn-sm btn-success">
                             Print
-                        </button>
+                        </button> -->
 
                     </td>
 

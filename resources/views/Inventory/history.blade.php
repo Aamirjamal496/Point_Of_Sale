@@ -22,7 +22,7 @@
 
     <div class="card-body">
 
-        <div class="row mb-4">
+        <!-- <div class="row mb-4">
 
             <div class="col-md-4">
                 <input type="text"
@@ -52,7 +52,7 @@
                 </button>
             </div>
 
-        </div>
+        </div> -->
 
         <div class="table-responsive">
 
@@ -68,8 +68,8 @@
                         <th>Transaction</th>
                         <th>Quantity</th>
                         <th>Stock After</th>
-                        <th>Reason</th>
-                        <th>User</th>
+                        <!-- <th>Reason</th>
+                        <th>User</th> -->
                     </tr>
 
                 </thead>
@@ -116,89 +116,7 @@
                     @else
                     <span class="bg-danger w-2xl">No history Found</span>
                     @endif
-                    <!-- <tr>
-
-                        <td>2</td>
-
-                        <td>21 Jun 2026</td>
-
-                        <td>Dell Laptop</td>
-
-                        <td>DL001</td>
-
-                        <td>
-                            <span class="badge bg-primary">
-                                Sale
-                            </span>
-                        </td>
-
-                        <td class="text-danger">
-                            -3
-                        </td>
-
-                        <td>77</td>
-
-                        <td>Invoice #1005</td>
-
-                        <td>Cashier</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>3</td>
-
-                        <td>22 Jun 2026</td>
-
-                        <td>Wireless Mouse</td>
-
-                        <td>MS001</td>
-
-                        <td>
-                            <span class="badge bg-warning text-dark">
-                                Adjustment
-                            </span>
-                        </td>
-
-                        <td class="text-danger">
-                            -2
-                        </td>
-
-                        <td>18</td>
-
-                        <td>Damaged Items</td>
-
-                        <td>Admin</td>
-
-                    </tr> -->
-
-                    <!-- <tr>
-
-                        <td>4</td>
-
-                        <td>23 Jun 2026</td>
-
-                        <td>Keyboard</td>
-
-                        <td>KB001</td>
-
-                        <td>
-                            <span class="badge bg-info">
-                                Return
-                            </span>
-                        </td>
-
-                        <td class="text-success">
-                            +1
-                        </td>
-
-                        <td>35</td>
-
-                        <td>Customer Return</td>
-
-                        <td>Admin</td>
-
-                    </tr> -->
+                    
 
                 </tbody>
 

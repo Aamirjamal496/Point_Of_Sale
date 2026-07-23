@@ -21,8 +21,8 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Total Purchases</small>
-                @if($purchases)
-                <h4>$34,800</h4>
+                @if($total_purchase)
+                <h4>{{$total_purchase}}</h4>
                 @endif
             </div>
         </div>
@@ -32,7 +32,9 @@
         <div class="card card-soft">
             <div class="card-body">
                 <small>Profit</small>
-                <h4>$17,650</h4>
+                @if($profit)
+                <h4>Rs.{{$profit}}</h4>
+                @endif
             </div>
         </div>
     </div>
@@ -56,47 +58,47 @@
         Report Filters
     </div>
 
-    <div class="card-body">
-
+    <form action="/reports/sales" class="card-body" method="GET">
+        @csrf
         <div class="row">
 
             <div class="col-md-4">
                 <label>From Date</label>
-                <input type="date" class="form-control">
+                <input type="date" name="start_date" class="form-control">
             </div>
 
             <div class="col-md-4">
                 <label>To Date</label>
-                <input type="date" class="form-control">
+                <input type="date" name="end_date" class="form-control">
             </div>
 
             <div class="col-md-4">
                 <label>Report Type</label>
-                <select class="form-select">
-                    <option>Sales Report</option>
-                    <option>Purchase Report</option>
-                    <option>Inventory Report</option>
+                <select class="form-select" name="report_type">
+                    <option value="Sales Report">Sales Report</option>
+                    <option value="Purchase Report">Purchase Report</option>
+                    <option value="Inventory Report">Inventory Report</option>
                 </select>
             </div>
 
         </div>
 
         <div class="mt-3">
-            <a href="/reports/sales" class="btn btn-primary">
+            <button class="btn btn-primary">
                 Generate Report
-            </a>
+            </button>
 
-            <button class="btn btn-success">
+            <!-- <a class="btn btn-success">
                 Export Excel
-            </button>
-
-            <button class="btn btn-danger">
+        </a>
+        
+            <a class="btn btn-danger">
                 Export PDF
-            </button>
+        </a> -->
         </div>
-
-    </div>
-
+        
+    </form>
+    
 </div>
 
 @endsection

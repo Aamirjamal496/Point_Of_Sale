@@ -40,7 +40,7 @@
 
     <div class="col-md-3">
         <div class="card card-soft stat-card">
-            <h6>Low Stock</h6>
+            <h6>Low Stock Limit</h6>
             <h3>15</h3>
         </div>
     </div>
@@ -99,18 +99,22 @@
             </div>
 
             <div class="card-body">
-
+                
                 <ul class="list-group">
+                    <a href="/export-lowStock" class="btn btn-success btn-sm" style="padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px; Float:right;">Sheet</a>
                     @if($low_stock)
                     @foreach($low_stock as $stock)
 
-                    <li class="list-group-item">
+                    <li class="list-group-item p-1">
                         {{$stock->product_name}}
                     </li>
                     @endforeach
                     @else
                     <li>No Items With Low Stock</li>
                     @endif
+                    <div class="mt-4 w-2">
+                        {{$low_stock->links()}}
+                    </div>
                 </ul>
 
             </div>

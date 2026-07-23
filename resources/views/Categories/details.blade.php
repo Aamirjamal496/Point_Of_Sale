@@ -63,7 +63,8 @@
                     <th>ID</th>
                     <th>Product Name</th>
                     <th>Stock</th>
-                    <th>Price</th>
+                    <th>Purchase Price</th>
+                    <th>Selling Price</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -88,7 +89,10 @@
                     </td>
 
                     <td>
-                        {{$product->price}}
+                        {{$product->purchase_price}}
+                    </td>
+                    <td>
+                        {{$product->selling_price}}
                     </td>
 
                     <td>

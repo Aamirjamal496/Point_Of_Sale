@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AuthController extends Controller
 {
@@ -48,7 +49,7 @@ class AuthController extends Controller
         $customers = Customer::count();
         $recent_sale = Sale::latest()->first();
         // return $recent_sale;
-        $low_stock = Product::whereColumn('stock', '<', 'min_stock')->get();
+        $low_stock = Product::whereColumn('stock', '<', 'min_stock')->simplePaginate(5);
         $today_sale = Sale::whereDate('created_at', Carbon::today())->sum('grandtotal');
         $monthlySales = Sale::select(
             DB::raw('MONTH(created_at) as month'),
@@ -72,4 +73,7 @@ $yearlyData = $yearlySales->values()->toArray();
         // return $yearlySales;
         return view('Admin.Dashboard', compact('products', 'customers', 'recent_sale', 'low_stock', 'today_sale', 'monthlyData', 'yearlyLabels','yearlyData'));
     }
+    // public function lowStockExcel(){
+    //     return "dummy";
+    // }
 }

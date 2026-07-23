@@ -39,7 +39,7 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Stock</th>
-                    <th>Price</th>
+                    <th>Selling Price</th>
                     <th>Action</th>
                 </tr>
 
@@ -65,7 +65,7 @@
 
                     <td>
 
-                        <a href="{{url('/products/edit/'.$product->id)}}" class="btn btn-sm btn-warning">
+                        <a href="{{url('/products/edit/'.$product->id)}}" class="btn btn-sm btn-warning px-2.5">
                             Edit
                         </a>
                         <form action="{{url('/products/delete/'.$product->id)}}" method="post">
