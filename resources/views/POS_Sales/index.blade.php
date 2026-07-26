@@ -24,7 +24,7 @@
                         <input type="text"
                             id="searchInput"
                             class="form-control"
-                            placeholder="Search product...">
+                            placeholder="Search product..."/>
                     </div>
 
                     <div class="col-md-4">
@@ -94,7 +94,7 @@
 
             <div class="card-body">
 
-                <select class="form-select mb-2" id="customer_id">
+                <select class="form-select mb-2" id="customer_id" required>
                     <option>Select Customer</option>
                     @foreach($customers as $customer)
                     <option value="{{$customer->id}}">{{$customer->name}}</option>

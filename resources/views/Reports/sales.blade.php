@@ -33,8 +33,9 @@
                     <th>Invoice #</th>
                     <th>Customer</th>
                     <th>Date</th>
-                    <th>Items</th>
+                    <!-- <th>Items</th> -->
                     <th>Total</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -44,8 +45,11 @@
                     <td>{{$report->invoice_no}}</td>
                     <td>{{$report->customer->name}}</td>
                     <td>{{$report->created_at}}</td>
-                    <td>4</td>
+                    <!-- <td>4</td> -->
                     <td>{{$report->grandtotal}}</td>
+                    <td><a href="{{url('/invoices/show/'.$report->id)}}" class="btn btn-sm btn-primary">
+                            View
+                        </a></td>
                 </tr>
                 @endforeach
                 

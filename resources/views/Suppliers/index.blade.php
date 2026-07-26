@@ -30,7 +30,8 @@
                     <th>Contact Person</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -45,6 +46,8 @@
                         <button class="btn btn-warning btn-sm">
                             Edit
                         </button>
+                    </td>
+                    <td>
                         <form action="{{url('/suppliers/delete/'.$supplier->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="delete" />

@@ -36,7 +36,6 @@
 
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Products</th>
                     <th>Action</th>
@@ -47,7 +46,7 @@
 
                 @foreach($categories as $category)
                 <tr>
-                    <td>{{$category->id}}</td>
+                    
                     <td>{{$category->name}}</td>
                     @if($products)
                     <td>{{$products}}</td>

@@ -22,7 +22,7 @@ class SuppliersController extends Controller
         $validate = $request->validate([
             'supp_name' => 'required|min:1|max:20',
             'contact_person' => 'required',
-            'phone' => 'required|string',
+            'phone' => 'required|integer',
             'email' => 'required|email',
             'address' => 'required',
         ]);
@@ -45,10 +45,10 @@ class SuppliersController extends Controller
     {
         $supplier = Supplier::destroy($id);
         if ($supplier) {
-            $request->session()->flash('success', 'Supplier Added Successfully');
+            $request->session()->flash('success', 'Supplier deleted Successfully');
             return redirect()->route('Suppliers');
         } else {
-            $request->session()->flash('error', 'Failed to Add Supplier');
+            $request->session()->flash('error', 'Failed to delete Supplier');
             return redirect()->route('Suppliers');
         }
     }

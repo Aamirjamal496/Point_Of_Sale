@@ -155,7 +155,7 @@
 
         <!-- Minimal Footprint Legal Signature -->
         <div class="text-center" style="margin-top: 20px;">
-            <p class="text-muted" style="opacity: 0.4; font-size: 12px;">&copy; {{ date('Y') }} Jamal's Smart POS Operational Unit.</p>
+            <p class="text-muted" style="opacity: 0.4; font-size: 12px;">&copy; {{ date('Y') }} AamirJamal's Smart POS Operational Unit.</p>
         </div>
     </div>
 

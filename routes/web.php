@@ -82,6 +82,7 @@ Route::middleware(['AuthUser'])->group(function () {
     // Invoices Routes:
     Route::get('/invoices', [InvoiceController::class, 'index']);
     Route::get('/invoices/show/{id}', [salesController::class, 'invoice']);
+    Route::get('/reciept/{id}', [salesController::class, 'reciept']);
 
     // Reports Routes:
     // Route::get('/reports', function () {

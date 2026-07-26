@@ -218,7 +218,7 @@
     </div>
 
     <div class="content">
-
+        @if (!request()->is('invoices/show*'))
         <div class="topbar d-flex justify-content-between align-items-center">
 
             <button class="btn btn-sm btn-outline-secondary d-md-none"
@@ -240,11 +240,12 @@
             </div>
 
         </div>
-
+        @endif
+        
         <div class="p-4">
             @yield('content')
         </div>
-
+        
     </div>
 
     
