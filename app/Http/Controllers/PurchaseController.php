@@ -21,10 +21,14 @@ class PurchaseController extends Controller
         //     return $items
         // }
         // return $purchases->purchase_items;
-        $supplierid = $purchases->first()->supplier_id;
-        $supplier = Supplier::findOrFail($supplierid);
-        // return $purchases;
-        return view("Purchases.index", compact(["purchases", "supplier"]));
+        if ($purchases->isNotEmpty()) {
+            $supplierid = $purchases->first()->supplier_id;
+            $supplier = Supplier::findOrFail($supplierid);
+            // return $purchases;
+            return view("Purchases.index", compact(["purchases", "supplier"]));
+        } else {
+            return view("Purchases.index", compact("purchases"));
+        }
     }
     public function PurchaseForm()
     {
@@ -81,7 +85,7 @@ class PurchaseController extends Controller
                 ]);
             }
         });
-        return redirect('')->with('', '');
+        return redirect('/purchases')->with('success', 'Purchase Complete');
     }
     // public function Createitems()
     // {

@@ -21,45 +21,9 @@
     </div>
 
     <div class="card-body">
-
-        <!-- <div class="row mb-4">
-
-            <div class="col-md-4">
-                <input type="text"
-                    class="form-control"
-                    placeholder="Search Product">
-            </div>
-
-            <div class="col-md-3">
-                <select class="form-select">
-                    <option>All Transactions</option>
-                    <option>Purchase</option>
-                    <option>Sale</option>
-                    <option>Adjustment</option>
-                    <option>Return</option>
-                    <option>Damage</option>
-                </select>
-            </div>
-
-            <div class="col-md-3">
-                <input type="date"
-                    class="form-control">
-            </div>
-
-            <div class="col-md-2">
-                <button class="btn btn-primary w-100">
-                    Filter
-                </button>
-            </div>
-
-        </div> -->
-
         <div class="table-responsive">
-
             <table class="table table-hover align-middle">
-
                 <thead>
-
                     <tr>
                         <th>#</th>
                         <th>Date</th>
@@ -71,9 +35,7 @@
                         <!-- <th>Reason</th>
                         <th>User</th> -->
                     </tr>
-
                 </thead>
-
                 <tbody>
                     @if($transactions)
                     @foreach($transactions as $transaction)
@@ -116,12 +78,15 @@
                     @else
                     <span class="bg-danger w-2xl">No history Found</span>
                     @endif
-                    
+
 
                 </tbody>
 
             </table>
 
+            <div>
+                {{$transactions->links()}}
+            </div>
         </div>
 
     </div>

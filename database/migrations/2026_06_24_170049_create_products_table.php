@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Supplier::class)->constrained()->onDelete('cascade');
             $table->string('sku', '100');
             $table->decimal('stock', '12', '2');
-            $table->decimal('min_stock', '12', '2')->default('15');
+            $table->decimal('min_stock', '12', '2');
             $table->decimal('purchase_price', '12', '2');
             $table->decimal('selling_price', '12', '2');
             $table->string('product_image', '255');

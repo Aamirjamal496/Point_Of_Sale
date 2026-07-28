@@ -103,8 +103,8 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-sm removeRow">
-                                            <i class="bi bi-box bi-sm"></i>
+                                        <button type="button" class="btn btn-danger btn-sm removeRow">X
+                                            <!-- <i class="bi bi-cross bi-sm"></i> -->
                                         </button>
                                     </td>
 

@@ -24,7 +24,7 @@
                         <input type="text"
                             id="searchInput"
                             class="form-control"
-                            placeholder="Search product..."/>
+                            placeholder="Search product..." />
                     </div>
 
                     <div class="col-md-4">
@@ -81,6 +81,9 @@
 
         </div>
 
+        <div>
+            {{$products->links()}}
+        </div>
     </div>
 
     {{-- ================= CART ================= --}}
@@ -95,7 +98,7 @@
             <div class="card-body">
 
                 <select class="form-select mb-2" id="customer_id" required>
-                    <option>Select Customer</option>
+                    <option value="3">Walk-In</option>
                     @foreach($customers as $customer)
                     <option value="{{$customer->id}}">{{$customer->name}}</option>
                     @endforeach
@@ -125,7 +128,7 @@
 
                 <div class="mb-2">
                     <label class="form-label">Discount</label>
-                    <input type="number" id="discountInput" class="form-control" value="0"  min="0" placeholder="Enter discount">
+                    <input type="number" id="discountInput" class="form-control" value="0" min="0" placeholder="Enter discount">
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -164,6 +167,19 @@
     </div>
 
 </div>
+<style>
+    .w-5 {
+        width: 10px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .links {
+        justify-items: center;
+    }
+</style>
 
 @endsection
 <script>
@@ -322,16 +338,16 @@
             alert('An error occurred during checkout. Check the console for details.');
         });
     }
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
 
-    const discountElement = document.getElementById('discountInput');
+        const discountElement = document.getElementById('discountInput');
 
-    if (discountElement) {
-        discountElement.addEventListener("input", function () {
-            console.log('DiscountChanged:',this.value);
-            renderCart();
-        });
-    }
+        if (discountElement) {
+            discountElement.addEventListener("input", function() {
+                console.log('DiscountChanged:', this.value);
+                renderCart();
+            });
+        }
 
-});
+    });
 </script>

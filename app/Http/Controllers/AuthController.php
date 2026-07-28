@@ -67,11 +67,11 @@ class AuthController extends Controller
             ->groupBy('year')
             ->orderBy('year')
             ->pluck('total', 'year');
-            $yearlyLabels = $yearlySales->keys()->toArray();
-$yearlyData = $yearlySales->values()->toArray();
+        $yearlyLabels = $yearlySales->keys()->toArray();
+        $yearlyData = $yearlySales->values()->toArray();
         // return $monthlyData;
         // return $yearlySales;
-        return view('Admin.Dashboard', compact('products', 'customers', 'recent_sale', 'low_stock', 'today_sale', 'monthlyData', 'yearlyLabels','yearlyData'));
+        return view('Admin.Dashboard', compact('products', 'customers', 'recent_sale', 'low_stock', 'today_sale', 'monthlyData', 'yearlyLabels', 'yearlyData'));
     }
     // public function lowStockExcel(){
     //     return "dummy";

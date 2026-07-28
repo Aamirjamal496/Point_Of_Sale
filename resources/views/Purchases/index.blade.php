@@ -5,6 +5,9 @@
 @section('content')
 
 <div class="card card-soft">
+    @if(session('success'))
+    @elsif(session('error'))
+    @endif
 
     <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
@@ -36,7 +39,7 @@
             </thead>
 
             <tbody>
-
+                @if($purchases->isNotEmpty())
                 @foreach($purchases as $purchase)
                 <tr>
                     <td>{{$purchase->id}}</td>
@@ -75,6 +78,11 @@
                         <!-- </td> -->
                 </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td>No purchase Found</td>
+                </tr>
+                @endif
 
             </tbody>
 

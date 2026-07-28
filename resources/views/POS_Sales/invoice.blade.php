@@ -29,7 +29,7 @@
                     target="_blank">
                     <i class="bi bi-printer"></i>
                     Reciept
-</a>
+                </a>
 
                 <!-- <a href="/invoices"
                     class="btn btn-secondary btn-sm">

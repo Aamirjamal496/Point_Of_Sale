@@ -6,12 +6,15 @@
 
 <div class="row g-3">
 
+
     <div class="col-md-3">
         <div class="card card-soft">
             <div class="card-body">
                 <small>Total Sales</small>
                 @if($sales)
                 <h4>Rs.{{$sales}}</h4>
+                @else
+                <h4>Rs.0</h4>
                 @endif
             </div>
         </div>
@@ -22,7 +25,9 @@
             <div class="card-body">
                 <small>Total Purchases</small>
                 @if($total_purchase)
-                <h4>{{$total_purchase}}</h4>
+                <h4>Rs.{{$total_purchase}}</h4>
+                @else
+                <h4>Rs.0.00</h4>
                 @endif
             </div>
         </div>
@@ -34,6 +39,8 @@
                 <small>Profit</small>
                 @if($profit)
                 <h4>Rs.{{$profit}}</h4>
+                @else
+                <h4>Rs.0.00</h4>
                 @endif
             </div>
         </div>
@@ -45,6 +52,8 @@
                 <small>Invoices</small>
                 @if($invoice_count)
                 <h4>{{$invoice_count}}</h4>
+                @else
+                <h4>0</h4>
                 @endif
             </div>
         </div>
@@ -96,9 +105,9 @@
                 Export PDF
         </a> -->
         </div>
-        
+
     </form>
-    
+
 </div>
 
 @endsection

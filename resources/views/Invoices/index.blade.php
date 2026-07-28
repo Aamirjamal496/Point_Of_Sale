@@ -53,9 +53,24 @@
             </tbody>
 
         </table>
+        <div class="links w-2">
+            {{$invoices->links()}}
+        </div>
 
     </div>
 
 </div>
+<style>
+    .w-5 {
+        width: 10px;
+    }
 
+    .hidden {
+        display: none;
+    }
+
+    .links {
+        justify-items: center;
+    }
+</style>
 @endsection

@@ -16,7 +16,7 @@ class InventoryController extends Controller
     }
     public function historyPage()
     {
-        $transactions  = InventoryTransaction::with('Product')->get();
+        $transactions  = InventoryTransaction::with('Product')->latest()->simplePaginate(10);
         // $transaction  = InventoryTransaction::get();
         // return $transaction;
         $product = $transactions->first()->product;

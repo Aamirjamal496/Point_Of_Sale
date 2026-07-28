@@ -99,7 +99,7 @@
             </div>
 
             <div class="card-body">
-                
+
                 <ul class="list-group">
                     <a href="/export-lowStock" class="btn btn-success btn-sm" style="padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px; Float:right;">Sheet</a>
                     @if($low_stock)
@@ -109,12 +109,12 @@
                         {{$stock->product_name}}
                     </li>
                     @endforeach
+                    <div class="links mt-1 w-2">
+                        {{$low_stock->links()}}
+                    </div>
                     @else
                     <li>No Items With Low Stock</li>
                     @endif
-                    <div class="mt-4 w-2">
-                        {{$low_stock->links()}}
-                    </div>
                 </ul>
 
             </div>
@@ -142,6 +142,13 @@
     </div>
 
 </div>
+<style>
+    /* .links {
+        padding-left: 1px;
+        padding-right: 1px;
+        border: none;
+    } */
+</style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>

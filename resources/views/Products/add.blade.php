@@ -49,6 +49,10 @@
                     <label>Stock</label>
                     <input type="number" name="stock" class="form-control">
                 </div>
+                <div class="col-md-4 mb-3">
+                    <label>Minimum Stock</label>
+                    <input type="number" name="min_stock" class="form-control">
+                </div>
 
                 <div class="col-md-4 mb-3">
                     <label>Purchase Price</label>

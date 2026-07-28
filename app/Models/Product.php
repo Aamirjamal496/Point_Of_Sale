@@ -9,7 +9,7 @@ use App\Models\Supplier;
 
 class Product extends Model
 {
-    protected $fillable = ['product_name', 'category_id', 'supplier_id', 'sku', 'stock', 'purchase_price', 'selling_price', 'product_image'];
+    protected $fillable = ['product_name', 'category_id', 'supplier_id', 'sku', 'min_stock', 'stock', 'purchase_price', 'selling_price', 'product_image'];
     function category()
     {
         return $this->belongsTo(Category::class);
