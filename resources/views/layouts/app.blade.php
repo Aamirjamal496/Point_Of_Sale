@@ -129,9 +129,10 @@
         .table {
             font-size: 14px;
         }
-        .logout-icon{
-           border: none;
-    color: #302f47;
+
+        .logout-icon {
+            border: none;
+            color: #302f47;
         }
 
         @media(max-width:768px) {
@@ -150,7 +151,6 @@
                 margin-left: 0;
             }
         }
-
     </style>
 </head>
 
@@ -159,10 +159,10 @@
     <div class="sidebar" id="sidebar">
 
         <div class="sidebar-brand">
-               <svg width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" viewBox="0 0 24 24">
-                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-                            <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"></path>
-                        </svg> Smart POS
+            <svg width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"></path>
+            </svg> Smart POS
         </div>
 
         <a href="/dashboard">
@@ -241,14 +241,14 @@
 
         </div>
         @endif
-        
+
         <div class="p-4">
             @yield('content')
         </div>
-        
+
     </div>
 
-    
+
     <script>
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('show');
